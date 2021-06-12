@@ -483,8 +483,6 @@ window.addEventListener("keyup", e => {
 
 for (let i = 0; i < startBtn.length; i++) {
   startBtn[i].addEventListener("click", () => {
-    score.textContent = 0;
-    fuel.value = 15;
     startLayout.style.display = "none";
     gameLayout.style.display = "block";
     gameOverLayout.style.display = "none";
@@ -539,8 +537,9 @@ init = () => {
   // console.log(fuelData);
 
   // mengurangi nilai fuel setiap 1 detik
-  // changeFuel(false, true);
+  changeFuel(false, true);
   enemyFire(false);
+  console.log(fuel.value);
   // console.log(enemies);
 
   //panggil fungsi animate untuk menjalan kan animasi
@@ -576,29 +575,11 @@ animate = () => {
 };
 
 changeFuel = (newFuel, time) => {
-  let decrementFuel, incrementFuel;
+  let decrementFuel;
 
   //mengecek apakah nilai fuel tidak false,undefined atau null
   if (newFuel && !time) {
-    if (newFuel > 0) {
-      clearTimeout(incrementFuel);
-      // menambah nilai fuel setiap 1 detik
-      incrementFuel = setTimeout(() => {
-        //menambahkan nilai fuel lama dengan fuel baru
-        fuel.value = Number(fuel.value) + 1;
-
-        if (Number(fuel.value) > 30) {
-          fuel.value = 30;
-        }
-
-        //siklus yang selalu berulang sampai di cleartimeout
-        changeFuel(newFuel - 1);
-      }, 1000);
-    } else if (newFuel < 0) {
-      fuel.value = Number(fuel.value) + newFuel;
-    }
-  } else {
-    clearTimeout(incrementFuel);
+    fuel.value = Number(fuel.value) + newFuel;
   }
 
   if (!newFuel && time) {
@@ -616,9 +597,8 @@ changeFuel = (newFuel, time) => {
     start = false;
 
     clearTimeout(decrementFuel);
-    clearTimeout(incrementFuel);
   }
-};
+}
 
 gameOver = () => {
   fuel.value = 0;
