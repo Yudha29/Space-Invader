@@ -483,6 +483,8 @@ window.addEventListener("keyup", e => {
 
 for (let i = 0; i < startBtn.length; i++) {
   startBtn[i].addEventListener("click", () => {
+    score.textContent = 0;
+    fuel.value = 30;
     startLayout.style.display = "none";
     gameLayout.style.display = "block";
     gameOverLayout.style.display = "none";
@@ -603,7 +605,7 @@ changeFuel = (newFuel, time) => {
 gameOver = () => {
   fuel.value = 0;
   // gameLayout.style.display = "none";
-  // gameOverLayout.style.display = "block";
+  gameOverLayout.style.display = "block";
   document.querySelector("#game-over-score").textContent = score.textContent;
 };
 
